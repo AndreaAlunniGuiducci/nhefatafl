@@ -1,13 +1,13 @@
-import {View} from 'react-native';
-import {Box} from '../Box';
-import {styles} from './styles';
-import {darkBox, exitBox, lightBox} from './styles';
-import {useAppSelector} from '../../customHooks/reduxHooks';
-import {useEffect} from 'react';
-import {startGame} from '../../utils/startGame';
+import { View } from "react-native";
+import { Box } from "../Box";
+import { styles } from "./styles";
+import { darkBox, exitBox, lightBox } from "./styles";
+import { useAppSelector } from "../../customHooks/reduxHooks";
+import { useEffect } from "react";
+import { startGame } from "../../utils/startGame";
 
 export const Board = () => {
-  const boardState = useAppSelector(state => state.board.board);
+  const boardState = useAppSelector((state) => state.board.board);
 
   startGame(boardState);
   useEffect(() => {}, [boardState]);
@@ -26,8 +26,9 @@ export const Board = () => {
               return (
                 <Box
                   key={`row_${row.row}-col_${row.col}`}
+                  position={{ row: row.row, col: row.col }}
                   piece={row.piece}
-                  style={{backgroundColor: exitBox}}
+                  style={{ backgroundColor: exitBox }}
                 />
               );
             }
@@ -38,16 +39,18 @@ export const Board = () => {
               return (
                 <Box
                   key={`row_${row.row}-col_${row.col}`}
+                  position={{ row: row.row, col: row.col }}
                   piece={row.piece}
-                  style={{backgroundColor: darkBox}}
+                  style={{ backgroundColor: darkBox }}
                 />
               );
             } else {
               return (
                 <Box
                   key={`row_${row.row}-col_${row.col}`}
+                  position={{ row: row.row, col: row.col }}
                   piece={row.piece}
-                  style={{backgroundColor: lightBox}}
+                  style={{ backgroundColor: lightBox }}
                 />
               );
             }

@@ -1,11 +1,11 @@
-import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const row = Array.from(Array(11).keys());
 const col = Array.from(Array(11).keys());
 const board = col.map((colItem, index) =>
   row.map((rowItem, index) => {
-    return {row: rowItem, col: colItem, piece: null};
-  }),
+    return { row: rowItem, col: colItem, piece: null };
+  })
 );
 
 interface boardState {
@@ -17,14 +17,18 @@ const initialState: boardState = {
 };
 
 const boardSlice = createSlice({
-  name: 'boardPosition',
+  name: "boardPosition",
   initialState,
   reducers: {
     setNewGame(state, action: PayloadAction<any>) {
-      state.board = action.payload
+      state.board = action.payload;
+    },
+    movePiece(state, action: PayloadAction<any>) {
+      state.board = action.payload;
     },
   },
 });
 
 export default boardSlice.reducer;
-export const {setNewGame} = boardSlice.actions;
+export const { setNewGame } = boardSlice.actions;
+export const { movePiece } = boardSlice.actions;
