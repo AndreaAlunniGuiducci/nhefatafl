@@ -77,9 +77,9 @@ export const Piece = ({ isDark, isKing, position }: any) => {
       columns[newCol + 1],
       columns[newCol + 2],
     ];
-
+    let newBoard = board;
     const pieceEated = (arrayToChek: any, index: number) => {
-      return board.map((col: any) =>
+      return newBoard.map((col: any) =>
         col.map((row: any) => {
           if (
             row.row === arrayToChek[index].row &&
@@ -96,10 +96,10 @@ export const Piece = ({ isDark, isKing, position }: any) => {
       (rowToCheck[2].piece === rowToCheck[0]?.piece ||
         rowToCheck[0]?.row === 0) &&
       rowToCheck[1].piece &&
-      rowToCheck[3].piece !== pieceColor.king &&
+      rowToCheck[1].piece !== pieceColor.king &&
       rowToCheck[2].piece !== rowToCheck[1].piece
     ) {
-      return pieceEated(rowToCheck, 1);
+      newBoard = pieceEated(rowToCheck, 1);
     }
     if (
       (rowToCheck[2].piece === rowToCheck[4]?.piece ||
@@ -108,16 +108,16 @@ export const Piece = ({ isDark, isKing, position }: any) => {
       rowToCheck[3].piece !== pieceColor.king &&
       rowToCheck[2].piece !== rowToCheck[3].piece
     ) {
-      return pieceEated(rowToCheck, 3);
+      newBoard = pieceEated(rowToCheck, 3);
     }
     if (
       (colToCheck[2].piece === colToCheck[0]?.piece ||
         colToCheck[0]?.row === 0) &&
       colToCheck[1].piece &&
-      colToCheck[3].piece !== pieceColor.king &&
+      colToCheck[1].piece !== pieceColor.king &&
       colToCheck[2].piece !== colToCheck[1].piece
     ) {
-      return pieceEated(colToCheck, 1);
+      newBoard = pieceEated(colToCheck, 1);
     }
     if (
       (colToCheck[2].piece === colToCheck[4]?.piece ||
@@ -126,10 +126,10 @@ export const Piece = ({ isDark, isKing, position }: any) => {
       colToCheck[3].piece !== pieceColor.king &&
       colToCheck[2].piece !== colToCheck[3].piece
     ) {
-      return pieceEated(colToCheck, 3);
+      newBoard = pieceEated(colToCheck, 3);
     }
 
-    return board;
+    return newBoard;
   };
 
   const move = (oldPosition: any, newPosition: any) => {
