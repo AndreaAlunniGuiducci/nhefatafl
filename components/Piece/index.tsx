@@ -25,12 +25,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     return newBoard;
   };
 
-  const move = (oldPosition: any, newPosition: any) => {
-    const oldRow = oldPosition.row;
-    const oldCol = oldPosition.col;
-    const newRow = oldRow + Math.trunc(newPosition.y / pieceMeasure);
-    const newCol = oldCol + Math.trunc(newPosition.x / pieceMeasure);
-
+  const limitParam = (oldRow: any, newRow: any, oldCol: any, newCol: any) => {
     if (oldRow === newRow) {
       const rowToMove = takePiece()
         .map((col) => col.filter((row: any) => oldRow === row.row))
@@ -39,6 +34,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         .slice(0, oldCol)
         .findLast((box: any) => box.piece);
       const endColLimit = rowToMove.slice(oldCol).find((box) => box.piece);
+      return { start: startColLimit, end: endColLimit };
     }
     if (oldCol === newCol) {
       const colToMove = takePiece()[oldCol];
@@ -46,12 +42,23 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         .slice(0, oldRow)
         .findLast((box: any) => box.piece);
       const endRowLimit = colToMove.slice(oldRow).find((box: any) => box.piece);
+      return { start: startRowLimit, end: endRowLimit };
     }
+  };
+
+  const move = (oldPosition: any, newPosition: any) => {
+    const oldRow = oldPosition.row;
+    const oldCol = oldPosition.col;
+    const newRow = oldRow + Math.trunc(newPosition.y / pieceMeasure);
+    const newCol = oldCol + Math.trunc(newPosition.x / pieceMeasure);
+    const limit = limitParam(oldRow, newRow, oldCol, newCol);
 
     if (
       (newRow !== oldRow || newCol !== oldCol) &&
       ((newRow === oldRow && newCol !== oldCol) ||
-        (newRow !== oldRow && newCol === oldCol))
+        (newRow !== oldRow && newCol === oldCol)) &&
+      ((limit?.start.col > newCol && limit?.end.col < newCol) ||
+        (limit?.start.row > newRow && limit?.end.row < newRow))
     ) {
       const newBoard = board.map((col) =>
         col.map((row: any) => {
