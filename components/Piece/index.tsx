@@ -12,7 +12,6 @@ export const Piece = ({ isDark, isKing, position }: any) => {
   const bgColor = isDark || isKing ? darkPiece : lightPiece;
   const board = useAppSelector((state) => state.board.board);
   const [reverse, setReverse] = useState(false);
-  const [limit, setLimit] = useState();
 
   const takePiece = () => {
     const newBoard = board.map((col) =>
@@ -34,13 +33,21 @@ export const Piece = ({ isDark, isKing, position }: any) => {
 
     if (oldRow === newRow) {
       const rowToMove = takePiece()
-        .map((col) =>
-          col.filter((row: any) => oldRow === row.row)
-        ).map(box => box[0])
-        const startLImit = rowToMove.slice(0, oldCol).findLast((box:any) => box.piece)
-        const endLImit = rowToMove.slice(oldCol).find(box => box.piece)
-      debugger
+        .map((col) => col.filter((row: any) => oldRow === row.row))
+        .map((box) => box[0]);
+      const startColLimit = rowToMove
+        .slice(0, oldCol)
+        .findLast((box: any) => box.piece);
+      const endColLimit = rowToMove.slice(oldCol).find((box) => box.piece);
     }
+    if (oldCol === newCol) {
+      const colToMove = takePiece()[oldCol];
+      const startRowLimit = colToMove
+        .slice(0, oldRow)
+        .findLast((box: any) => box.piece);
+      const endRowLimit = colToMove.slice(oldRow).find((box: any) => box.piece);
+    }
+
     if (
       (newRow !== oldRow || newCol !== oldCol) &&
       ((newRow === oldRow && newCol !== oldCol) ||
