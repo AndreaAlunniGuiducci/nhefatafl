@@ -4,7 +4,7 @@ import Draggable from "react-native-draggable";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
 import { movePiece } from "../../store/slices/boardSlice";
 import { pieceColor } from "../../utils/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Piece = ({ isDark, isKing, position }: any) => {
   const dispatch = useAppDispatch();
@@ -27,14 +27,20 @@ export const Piece = ({ isDark, isKing, position }: any) => {
 
   const limitParam = (oldRow: any, newRow: any, oldCol: any, newCol: any) => {
     if (oldRow === newRow) {
-      const rowToMove = takePiece()
-        .map((col) => col.filter((row: any) => oldRow === row.row))
-        .map((box) => box[0]);
+      const rowToMove = takePiece().map(
+        (col) => col.filter((row: any) => oldRow === row.row)[0]
+      );
       const startColLimit = rowToMove
         .slice(0, oldCol)
         .findLast((box: any) => box.piece);
       const endColLimit = rowToMove.slice(oldCol).find((box) => box.piece);
-      return { start: startColLimit, end: endColLimit };
+      return {
+        start: startColLimit ?? { row: -1, col: -1 },
+        end: endColLimit ?? {
+          row: rowToMove.length + 1,
+          col: rowToMove.length + 1,
+        },
+      };
     }
     if (oldCol === newCol) {
       const colToMove = takePiece()[oldCol];
@@ -42,8 +48,113 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         .slice(0, oldRow)
         .findLast((box: any) => box.piece);
       const endRowLimit = colToMove.slice(oldRow).find((box: any) => box.piece);
-      return { start: startRowLimit, end: endRowLimit };
+      return {
+        start: startRowLimit ?? { row: -1, col: -1 },
+        end: endRowLimit ?? {
+          row: colToMove.length + 1,
+          col: colToMove.length + 1,
+        },
+      };
     }
+  };
+
+  const eatingPiece = (newBoard: any, newRow: any, newCol: any) => {
+    const rows = newBoard[newCol];
+    const rowToCheck = [
+      rows[newRow - 2],
+      rows[newRow - 1],
+      rows[newRow],
+      rows[newRow + 1],
+      rows[newRow + 2],
+    ];
+    const columns = newBoard.map(
+      (col: any) => col.filter((row: any) => row.row === newRow)[0]
+    );
+    const colToCheck = [
+      columns[newCol - 2],
+      columns[newCol - 1],
+      columns[newCol],
+      columns[newCol + 1],
+      columns[newCol + 2],
+    ];
+
+    const pieceEated = (objectToChek: any, index: number) => {
+      return newBoard.map((col: any) =>
+        col.map((row: any) => {
+          if (
+            row.row === objectToChek[index].row &&
+            row.col === objectToChek[index].col
+          ) {
+            return { ...objectToChek[index], piece: null };
+          }
+          return row;
+        })
+      );
+    };
+
+    if (
+      rowToCheck[0]?.piece &&
+      rowToCheck[1]?.piece &&
+      rowToCheck[2]?.piece &&
+      rowToCheck[1].piece !== pieceColor.king &&
+      rowToCheck[0].piece === rowToCheck[2].piece &&
+      rowToCheck[1].piece !== rowToCheck[0].piece
+    ) {
+      return pieceEated(rowToCheck, 1);
+    }
+    if (
+      rowToCheck[1]?.piece &&
+      rowToCheck[2]?.piece &&
+      rowToCheck[3]?.piece &&
+      rowToCheck[2].piece !== pieceColor.king &&
+      rowToCheck[1].piece === rowToCheck[3].piece &&
+      rowToCheck[2].piece !== rowToCheck[1].piece
+    ) {
+      return pieceEated(rowToCheck, 2);
+    }
+    if (
+      rowToCheck[2]?.piece &&
+      rowToCheck[3]?.piece &&
+      rowToCheck[4]?.piece &&
+      rowToCheck[3].piece !== pieceColor.king &&
+      rowToCheck[2].piece === rowToCheck[4].piece &&
+      rowToCheck[3].piece !== rowToCheck[2].piece
+    ) {
+      return pieceEated(rowToCheck, 3);
+    }
+
+    if (
+      colToCheck[0]?.piece &&
+      colToCheck[1]?.piece &&
+      colToCheck[2]?.piece &&
+      colToCheck[1].piece !== pieceColor.king &&
+      colToCheck[0].piece === colToCheck[2].piece &&
+      colToCheck[1].piece !== colToCheck[0].piece
+    ) {
+      return pieceEated(colToCheck, 1);
+    }
+    if (
+      colToCheck[1]?.piece &&
+      colToCheck[2]?.piece &&
+      colToCheck[3]?.piece &&
+      colToCheck[2].piece !== pieceColor.king &&
+      colToCheck[1].piece === colToCheck[3].piece &&
+      colToCheck[2].piece !== colToCheck[1].piece
+    ) {
+      return pieceEated(colToCheck, 2);
+    }
+    if (
+      colToCheck[2]?.piece &&
+      colToCheck[3]?.piece &&
+      colToCheck[4]?.piece &&
+      colToCheck[3].piece !== pieceColor.king &&
+      colToCheck[2].piece === colToCheck[4].piece &&
+      colToCheck[3].piece !== colToCheck[2].piece
+    ) {
+      return pieceEated(colToCheck, 3);
+    }
+    
+    return newBoard;
   };
 
   const move = (oldPosition: any, newPosition: any) => {
@@ -57,8 +168,8 @@ export const Piece = ({ isDark, isKing, position }: any) => {
       (newRow !== oldRow || newCol !== oldCol) &&
       ((newRow === oldRow && newCol !== oldCol) ||
         (newRow !== oldRow && newCol === oldCol)) &&
-      ((limit?.start.col > newCol && limit?.end.col < newCol) ||
-        (limit?.start.row > newRow && limit?.end.row < newRow))
+      ((limit?.start.col < newCol && limit?.end.col > newCol) ||
+        (limit?.start.row < newRow && limit?.end.row > newRow))
     ) {
       const newBoard = board.map((col) =>
         col.map((row: any) => {
@@ -78,7 +189,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
           return row;
         })
       );
-      dispatch(movePiece(newBoard));
+      dispatch(movePiece(eatingPiece(newBoard, newRow, newCol)));
     }
     setReverse(true);
   };
@@ -98,14 +209,5 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         shouldReverse={reverse}
       />
     </View>
-    // <Pressable
-    //   onPress={e => {
-    //     e.preventDefault();
-    //     move(position)
-    //   }}
-    //   style={[
-    //     styles.piece,
-    //     {backgroundColor: bgColor, borderRadius: isKing ? 1 : 25},
-    //   ]}></Pressable>
   );
 };
