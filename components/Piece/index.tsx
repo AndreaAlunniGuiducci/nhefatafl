@@ -77,10 +77,9 @@ export const Piece = ({ isDark, isKing, position }: any) => {
       columns[newCol + 1],
       columns[newCol + 2],
     ];
-    let newBoard = board;
-debugger
+
     const pieceEated = (arrayToChek: any, index: number) => {
-      return newBoard.map((col: any) =>
+      return board.map((col: any) =>
         col.map((row: any) => {
           if (
             row.row === arrayToChek[index].row &&
@@ -92,69 +91,45 @@ debugger
         })
       );
     };
+
     if (
-      rowToCheck[0]?.piece &&
-      rowToCheck[1]?.piece &&
-      rowToCheck[2]?.piece &&
-      rowToCheck[1].piece !== pieceColor.king &&
-      rowToCheck[0].piece === rowToCheck[2].piece &&
-      rowToCheck[1].piece !== rowToCheck[0].piece
-    ) {
-      newBoard = pieceEated(rowToCheck, 1);
-    }
-    if (
-      rowToCheck[1]?.piece &&
-      rowToCheck[2]?.piece &&
-      rowToCheck[3]?.piece &&
-      rowToCheck[2].piece !== pieceColor.king &&
-      rowToCheck[1].piece === rowToCheck[3].piece &&
+      (rowToCheck[2].piece === rowToCheck[0]?.piece ||
+        rowToCheck[0]?.row === 0) &&
+      rowToCheck[1].piece &&
+      rowToCheck[3].piece !== pieceColor.king &&
       rowToCheck[2].piece !== rowToCheck[1].piece
     ) {
-      newBoard = pieceEated(rowToCheck, 2);
+      return pieceEated(rowToCheck, 1);
     }
     if (
-      rowToCheck[2]?.piece &&
-      rowToCheck[3]?.piece &&
-      rowToCheck[4]?.piece &&
+      (rowToCheck[2].piece === rowToCheck[4]?.piece ||
+        rowToCheck[4]?.row === 10) &&
+      rowToCheck[3].piece &&
       rowToCheck[3].piece !== pieceColor.king &&
-      rowToCheck[2].piece === rowToCheck[4].piece &&
-      rowToCheck[3].piece !== rowToCheck[2].piece
+      rowToCheck[2].piece !== rowToCheck[3].piece
     ) {
-      newBoard = pieceEated(rowToCheck, 3);
-    }
-
-    if (
-      colToCheck[0]?.piece &&
-      colToCheck[1]?.piece &&
-      colToCheck[2]?.piece &&
-      colToCheck[1].piece !== pieceColor.king &&
-      colToCheck[0].piece === colToCheck[2].piece &&
-      colToCheck[1].piece !== colToCheck[0].piece
-    ) {
-      newBoard = pieceEated(colToCheck, 1);
+      return pieceEated(rowToCheck, 3);
     }
     if (
-      colToCheck[1]?.piece &&
-      colToCheck[2]?.piece &&
-      colToCheck[3]?.piece &&
-      colToCheck[2].piece !== pieceColor.king &&
-      colToCheck[1].piece === colToCheck[3].piece &&
+      (colToCheck[2].piece === colToCheck[0]?.piece ||
+        colToCheck[0]?.row === 0) &&
+      colToCheck[1].piece &&
+      colToCheck[3].piece !== pieceColor.king &&
       colToCheck[2].piece !== colToCheck[1].piece
     ) {
-      newBoard = pieceEated(colToCheck, 2);
+      return pieceEated(colToCheck, 1);
     }
     if (
-      colToCheck[2]?.piece &&
-      colToCheck[3]?.piece &&
-      colToCheck[4]?.piece &&
+      (colToCheck[2].piece === colToCheck[4]?.piece ||
+        colToCheck[4]?.row === 10) &&
+      colToCheck[3].piece &&
       colToCheck[3].piece !== pieceColor.king &&
-      colToCheck[2].piece === colToCheck[4].piece &&
-      colToCheck[3].piece !== colToCheck[2].piece
+      colToCheck[2].piece !== colToCheck[3].piece
     ) {
-      newBoard = pieceEated(colToCheck, 3);
+      return pieceEated(colToCheck, 3);
     }
 
-    return newBoard ?? board;
+    return board;
   };
 
   const move = (oldPosition: any, newPosition: any) => {
