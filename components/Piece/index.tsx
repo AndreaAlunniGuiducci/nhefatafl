@@ -3,7 +3,7 @@ import { darkPiece, lightPiece, styles } from "./styles";
 import Draggable from "react-native-draggable";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
 import { movePiece } from "../../store/slices/boardSlice";
-import { pieceColor } from "../../utils/utils";
+import { pieceColor, rangeNumber } from "../../utils/utils";
 import { useEffect, useState } from "react";
 
 export const Piece = ({ isDark, isKing, position }: any) => {
@@ -13,15 +13,6 @@ export const Piece = ({ isDark, isKing, position }: any) => {
   const board = useAppSelector((state) => state.board.board);
   const [reverse, setReverse] = useState(false);
 
-  const rangeNumber = (num: number, min: number, max: number) => {
-    if (num > max) {
-      return max;
-    }
-    if (num < min) {
-      return min;
-    }
-    return num;
-  };
   const takePiece = () => {
     const newBoard = board.map((col) =>
       col.map((row: any) => {
