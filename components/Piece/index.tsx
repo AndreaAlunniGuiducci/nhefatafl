@@ -25,7 +25,12 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     return newBoard;
   };
 
-  const limitParam = (oldRow: any, newRow: any, oldCol: any, newCol: any) => {
+  const limitParam = (
+    oldRow: number,
+    newRow: number,
+    oldCol: number,
+    newCol: number
+  ) => {
     if (oldRow === newRow) {
       const rowToMove = takePiece().map(
         (col) => col.filter((row: any) => oldRow === row.row)[0]
@@ -58,9 +63,8 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     }
   };
 
-  const eatingPiece = (board: any, newRow: any, newCol: any) => {
+  const eatingPiece = (board: any, newRow: number, newCol: number) => {
     const rows = board[newCol];
-    debugger;
     const rowToCheck = [
       rows[newRow - 2],
       rows[newRow - 1],
@@ -92,7 +96,6 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         })
       );
     };
-    debugger;
     if (
       (rowToCheck[2].piece === rowToCheck[0]?.piece ||
         (rowToCheck[0]?.row === 0 &&
@@ -150,15 +153,16 @@ export const Piece = ({ isDark, isKing, position }: any) => {
   };
 
   const move = (oldPosition: any, newPosition: any) => {
+    debugger
     const oldRow = oldPosition.row;
     const oldCol = oldPosition.col;
     const newRow = rangeNumber(
-      oldRow + Math.round(newPosition.y / pieceMeasure),
+      oldRow + Math.trunc(newPosition.y / pieceMeasure),
       0,
       10
     );
     const newCol = rangeNumber(
-      oldCol + Math.round(newPosition.x / pieceMeasure),
+      oldCol + Math.trunc(newPosition.x / pieceMeasure),
       0,
       10
     );
@@ -190,6 +194,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         })
       );
       dispatch(movePiece(eatingPiece(newBoard, newRow, newCol)));
+      
     }
     setReverse(true);
   };
