@@ -1,4 +1,4 @@
-export const pieceColor = {dark: 'dark', light: 'light', king: 'king'};
+export const pieceType = {dark: 'dark', light: 'light', king: 'king'};
 
 
 export const rangeNumber = (num: number, min: number, max: number) => {

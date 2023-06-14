@@ -1,4 +1,4 @@
-import {pieceColor} from './utils';
+import {pieceType} from './utils';
 
 export const startGame = (boardState: any[]) => {
   const newGameState = boardState.map(colItem =>
@@ -33,7 +33,7 @@ export const startGame = (boardState: any[]) => {
             rowItem.row === 7)) ||
         (rowItem.col === 9 && rowItem.row === 5)
       ) {
-        return {row: rowItem.row, col: rowItem.col, piece: pieceColor.light};
+        return {row: rowItem.row, col: rowItem.col, piece: pieceType.light};
       }
       if (
         ((rowItem.col === 3 ||
@@ -45,10 +45,10 @@ export const startGame = (boardState: any[]) => {
           (rowItem.row === 4 || rowItem.row === 6)) ||
         (rowItem.col === 5 && (rowItem.row === 3 || rowItem.row === 7))
       ) {
-        return {row: rowItem.row, col: rowItem.col, piece: pieceColor.dark};
+        return {row: rowItem.row, col: rowItem.col, piece: pieceType.dark};
       }
       if (rowItem.row === 5 && rowItem.col === 5) {
-        return {row: rowItem.row, col: rowItem.col, piece: pieceColor.king};
+        return {row: rowItem.row, col: rowItem.col, piece: pieceType.king};
       } else {
         return {row: rowItem.row, col: rowItem.col, piece: null};
       }

@@ -3,7 +3,7 @@ import { darkPiece, lightPiece, styles } from "./styles";
 import Draggable from "react-native-draggable";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
 import { movePiece } from "../../store/slices/boardSlice";
-import { pieceColor, rangeNumber } from "../../utils/utils";
+import { pieceType, rangeNumber } from "../../utils/utils";
 import { useEffect, useState } from "react";
 
 export const Piece = ({ isDark, isKing, position }: any) => {
@@ -104,7 +104,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
           rowToCheck[0]?.col === 5 &&
           !rowToCheck[0]?.piece)) &&
       rowToCheck[1].piece &&
-      rowToCheck[1].piece !== pieceColor.king &&
+      rowToCheck[1].piece !== pieceType.king &&
       rowToCheck[2].piece !== rowToCheck[1].piece
     ) {
       newBoard = pieceEated(rowToCheck, 1);
@@ -117,7 +117,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
           rowToCheck[4]?.row === 5 &&
           !rowToCheck[4]?.piece)) &&
       rowToCheck[3].piece &&
-      rowToCheck[3].piece !== pieceColor.king &&
+      rowToCheck[3].piece !== pieceType.king &&
       rowToCheck[2].piece !== rowToCheck[3].piece
     ) {
       newBoard = pieceEated(rowToCheck, 3);
@@ -130,7 +130,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
           colToCheck[0]?.row === 5 &&
           !colToCheck[0]?.piece)) &&
       colToCheck[1].piece &&
-      colToCheck[1].piece !== pieceColor.king &&
+      colToCheck[1].piece !== pieceType.king &&
       colToCheck[2].piece !== colToCheck[1].piece
     ) {
       newBoard = pieceEated(colToCheck, 1);
@@ -143,7 +143,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
           colToCheck[4]?.row === 5 &&
           !colToCheck[4]?.piece)) &&
       colToCheck[3].piece &&
-      colToCheck[3].piece !== pieceColor.king &&
+      colToCheck[3].piece !== pieceType.king &&
       colToCheck[2].piece !== colToCheck[3].piece
     ) {
       newBoard = pieceEated(colToCheck, 3);
@@ -184,10 +184,10 @@ export const Piece = ({ isDark, isKing, position }: any) => {
             return {
               ...row,
               piece: isKing
-                ? pieceColor.king
+                ? pieceType.king
                 : isDark
-                ? pieceColor.dark
-                : pieceColor.light,
+                ? pieceType.dark
+                : pieceType.light,
             };
           }
           return row;

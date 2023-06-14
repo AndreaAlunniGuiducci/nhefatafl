@@ -1,17 +1,17 @@
 import { Pressable } from "react-native";
 import { styles } from "./styles";
 import { Piece } from "../Piece";
-import { pieceColor } from "../../utils/utils";
+import { pieceType } from "../../utils/utils";
 
 export const Box = ({ style, piece, position }: any) => {
   const pieces = () => {
-    if (piece === pieceColor.dark) {
+    if (piece === pieceType.dark) {
       return <Piece isDark={true} position={position} />;
     }
-    if (piece === pieceColor.light) {
+    if (piece === pieceType.light) {
       return <Piece isDark={false} position={position} />;
     }
-    if (piece === pieceColor.king) {
+    if (piece === pieceType.king) {
       return <Piece isKing={true} position={position} />;
     } else {
       return piece;
