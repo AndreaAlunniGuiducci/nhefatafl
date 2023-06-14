@@ -1,7 +1,6 @@
 import { View } from "react-native";
 import { Box } from "../Box";
-import { styles } from "./styles";
-import { darkBox, exitBox, lightBox } from "./styles";
+import { darkBox, exitBox, styles, throne, lightBox } from "./styles";
 import { useAppSelector } from "../../customHooks/reduxHooks";
 import { useEffect } from "react";
 import { startGame } from "../../utils/startGame";
@@ -17,6 +16,16 @@ export const Board = () => {
       {boardState.map((col, index) => (
         <View key={index}>
           {col.map((row: any) => {
+            if (row.row === 5 && row.col === 5) {
+              return (
+                <Box
+                  key={`row_${row.row}-col_${row.col}`}
+                  position={{ row: row.row, col: row.col }}
+                  piece={row.piece}
+                  style={{ backgroundColor: throne }}
+                />
+              );
+            }
             if (
               (row.row === 0 && row.col === 0) ||
               (row.row === col.length - 1 && row.col === 0) ||
