@@ -13,6 +13,15 @@ export const Piece = ({ isDark, isKing, position }: any) => {
   const board = useAppSelector((state) => state.board.board);
   const [reverse, setReverse] = useState(false);
 
+  const rangeNumber = (num: number, min: number, max: number) => {
+    if (num > max) {
+      return max;
+    }
+    if (num < min) {
+      return min;
+    }
+    return num;
+  };
   const takePiece = () => {
     const newBoard = board.map((col) =>
       col.map((row: any) => {
@@ -60,6 +69,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
 
   const eatingPiece = (board: any, newRow: any, newCol: any) => {
     const rows = board[newCol];
+    debugger;
     const rowToCheck = [
       rows[newRow - 2],
       rows[newRow - 1],
@@ -91,10 +101,14 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         })
       );
     };
-
+    debugger;
     if (
       (rowToCheck[2].piece === rowToCheck[0]?.piece ||
-        rowToCheck[0]?.row === 0) &&
+        (rowToCheck[0]?.row === 0 &&
+          (rowToCheck[0]?.col === 0 || rowToCheck[0]?.col === 10)) ||
+        (rowToCheck[0]?.row === 5 &&
+          rowToCheck[0]?.col === 5 &&
+          !rowToCheck[0]?.piece)) &&
       rowToCheck[1].piece &&
       rowToCheck[1].piece !== pieceColor.king &&
       rowToCheck[2].piece !== rowToCheck[1].piece
@@ -103,7 +117,11 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     }
     if (
       (rowToCheck[2].piece === rowToCheck[4]?.piece ||
-        rowToCheck[4]?.row === 10) &&
+        (rowToCheck[4]?.row === 10 &&
+          (rowToCheck[4]?.col === 10 || rowToCheck[4]?.col === 0)) ||
+        (rowToCheck[4]?.row === 5 &&
+          rowToCheck[4]?.row === 5 &&
+          !rowToCheck[4]?.piece)) &&
       rowToCheck[3].piece &&
       rowToCheck[3].piece !== pieceColor.king &&
       rowToCheck[2].piece !== rowToCheck[3].piece
@@ -112,7 +130,11 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     }
     if (
       (colToCheck[2].piece === colToCheck[0]?.piece ||
-        colToCheck[0]?.row === 0) &&
+        (colToCheck[0]?.col === 0 &&
+          (colToCheck[0].row === 0 || colToCheck[0].row === 10)) ||
+        (colToCheck[0]?.col === 5 &&
+          colToCheck[0]?.row === 5 &&
+          !colToCheck[0]?.piece)) &&
       colToCheck[1].piece &&
       colToCheck[1].piece !== pieceColor.king &&
       colToCheck[2].piece !== colToCheck[1].piece
@@ -121,7 +143,11 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     }
     if (
       (colToCheck[2].piece === colToCheck[4]?.piece ||
-        colToCheck[4]?.row === 10) &&
+        (colToCheck[4]?.col === 10 &&
+          (colToCheck[4]?.row === 10 || colToCheck[4]?.row === 0)) ||
+        (colToCheck[4]?.col === 5 &&
+          colToCheck[4]?.row === 5 &&
+          !colToCheck[4]?.piece)) &&
       colToCheck[3].piece &&
       colToCheck[3].piece !== pieceColor.king &&
       colToCheck[2].piece !== colToCheck[3].piece
@@ -135,8 +161,16 @@ export const Piece = ({ isDark, isKing, position }: any) => {
   const move = (oldPosition: any, newPosition: any) => {
     const oldRow = oldPosition.row;
     const oldCol = oldPosition.col;
-    const newRow = oldRow + Math.trunc(newPosition.y / pieceMeasure);
-    const newCol = oldCol + Math.trunc(newPosition.x / pieceMeasure);
+    const newRow = rangeNumber(
+      oldRow + Math.round(newPosition.y / pieceMeasure),
+      0,
+      10
+    );
+    const newCol = rangeNumber(
+      oldCol + Math.round(newPosition.x / pieceMeasure),
+      0,
+      10
+    );
     const limit = limitParam(oldRow, newRow, oldCol, newCol);
 
     if (
