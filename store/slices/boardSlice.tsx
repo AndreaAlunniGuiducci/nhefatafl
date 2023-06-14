@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { colorTheme } from "../../utils/gameSrtting";
 
 const row = Array.from(Array(11).keys());
 const col = Array.from(Array(11).keys());
@@ -10,10 +11,12 @@ const board = col.map((colItem, index) =>
 
 interface boardState {
   board: any[];
+  colorTheme: any
 }
 
 const initialState: boardState = {
   board: board,
+  colorTheme: colorTheme.classic
 };
 
 const boardSlice = createSlice({

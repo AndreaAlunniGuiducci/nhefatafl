@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { darkPiece, lightPiece, styles } from "./styles";
+import { styles } from "./styles";
 import Draggable from "react-native-draggable";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
 import { movePiece } from "../../store/slices/boardSlice";
@@ -9,8 +9,10 @@ import { useEffect, useState } from "react";
 export const Piece = ({ isDark, isKing, position }: any) => {
   const dispatch = useAppDispatch();
   const pieceMeasure = 25;
-  const bgColor = isDark || isKing ? darkPiece : lightPiece;
   const board = useAppSelector((state) => state.board.board);
+  const colorTheme = useAppSelector((state) => state.board.colorTheme);
+  const bgColor =
+    isDark || isKing ? colorTheme.darkPiece : colorTheme.lightPiece;
   const [reverse, setReverse] = useState(false);
 
   const takePiece = () => {
@@ -153,7 +155,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
   };
 
   const move = (oldPosition: any, newPosition: any) => {
-    debugger
+    debugger;
     const oldRow = oldPosition.row;
     const oldCol = oldPosition.col;
     const newRow = rangeNumber(
@@ -194,7 +196,6 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         })
       );
       dispatch(movePiece(eatingPiece(newBoard, newRow, newCol)));
-      
     }
     setReverse(true);
   };

@@ -1,12 +1,13 @@
 import { View } from "react-native";
 import { Box } from "../Box";
-import { darkBox, exitBox, styles, throne, lightBox } from "./styles";
+import { styles } from "./styles";
 import { useAppSelector } from "../../customHooks/reduxHooks";
 import { useEffect } from "react";
 import { startGame } from "../../utils/startGame";
 
 export const Board = () => {
   const boardState = useAppSelector((state) => state.board.board);
+  const colorTheme = useAppSelector((state) => state.board.colorTheme);
 
   startGame(boardState);
   useEffect(() => {}, [boardState]);
@@ -22,7 +23,7 @@ export const Board = () => {
                   key={`row_${row.row}-col_${row.col}`}
                   position={{ row: row.row, col: row.col }}
                   piece={row.piece}
-                  style={{ backgroundColor: throne }}
+                  style={{ backgroundColor: colorTheme.throne }}
                 />
               );
             }
@@ -37,7 +38,7 @@ export const Board = () => {
                   key={`row_${row.row}-col_${row.col}`}
                   position={{ row: row.row, col: row.col }}
                   piece={row.piece}
-                  style={{ backgroundColor: exitBox }}
+                  style={{ backgroundColor: colorTheme.exitBox }}
                 />
               );
             }
@@ -50,7 +51,7 @@ export const Board = () => {
                   key={`row_${row.row}-col_${row.col}`}
                   position={{ row: row.row, col: row.col }}
                   piece={row.piece}
-                  style={{ backgroundColor: darkBox }}
+                  style={{ backgroundColor: colorTheme.darkBox }}
                 />
               );
             } else {
@@ -59,7 +60,7 @@ export const Board = () => {
                   key={`row_${row.row}-col_${row.col}`}
                   position={{ row: row.row, col: row.col }}
                   piece={row.piece}
-                  style={{ backgroundColor: lightBox }}
+                  style={{ backgroundColor: colorTheme.lightBox }}
                 />
               );
             }
