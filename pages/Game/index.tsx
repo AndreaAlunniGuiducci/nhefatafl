@@ -8,6 +8,7 @@ import { useEffect } from "react";
 export const Game = () => {
   const dispatch = useAppDispatch();
   const board = useAppSelector((state) => state.board.board);
+  const turn = useAppSelector((state) => state.board.turn);
 
   const newGame = () => {
     dispatch(setNewGame(startGame(board)));
@@ -20,6 +21,9 @@ export const Game = () => {
       </Pressable>
       <View style={{ flexDirection: "row" }}>
         <Board />
+      </View>
+      <View>
+        <Text>È il turno {!turn ? "degli attaccanti" : "dei difensori"} </Text>
       </View>
     </View>
   );

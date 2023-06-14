@@ -2,7 +2,7 @@ import { View } from "react-native";
 import { styles } from "./styles";
 import Draggable from "react-native-draggable";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
-import { movePiece } from "../../store/slices/boardSlice";
+import { movePiece, passTurn } from "../../store/slices/boardSlice";
 import { pieceType, rangeNumber } from "../../utils/utils";
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
   const pieceMeasure = 25;
   const board = useAppSelector((state) => state.board.board);
   const colorTheme = useAppSelector((state) => state.board.colorTheme);
+  const turn = useAppSelector((state) => state.board.turn);
   const bgColor =
     isDark || isKing ? colorTheme.darkPiece : colorTheme.lightPiece;
   const [reverse, setReverse] = useState(false);
@@ -155,7 +156,6 @@ export const Piece = ({ isDark, isKing, position }: any) => {
   };
 
   const move = (oldPosition: any, newPosition: any) => {
-    debugger;
     const oldRow = oldPosition.row;
     const oldCol = oldPosition.col;
     const newRow = rangeNumber(
@@ -171,6 +171,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     const limit = limitParam(oldRow, newRow, oldCol, newCol);
 
     if (
+      turn === isDark &&
       (newRow !== oldRow || newCol !== oldCol) &&
       ((newRow === oldRow && newCol !== oldCol) ||
         (newRow !== oldRow && newCol === oldCol)) &&
@@ -196,6 +197,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         })
       );
       dispatch(movePiece(eatingPiece(newBoard, newRow, newCol)));
+      dispatch(passTurn(isDark));
     }
     setReverse(true);
   };
