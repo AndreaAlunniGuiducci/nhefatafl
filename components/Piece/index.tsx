@@ -12,6 +12,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
   const pieceMeasure = 25;
   const board = useAppSelector((state) => state.board.board);
   const colorTheme = useAppSelector((state) => state.board.colorTheme);
+  const darkTurn = useAppSelector((state) => state.gameState.darkTurn);
   const bgColor =
     isDark || isKing ? colorTheme.darkPiece : colorTheme.lightPiece;
   const [reverse, setReverse] = useState(false);
@@ -232,7 +233,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     const limit = limitParam(oldRow, newRow, oldCol, newCol);
 
     if (
-      // darkTurn === isDark &&
+      darkTurn === isDark &&
       (newRow !== oldRow || newCol !== oldCol) &&
       ((newRow === oldRow && newCol !== oldCol) ||
         (newRow !== oldRow && newCol === oldCol)) &&
@@ -258,6 +259,13 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         })
       );
       dispatch(movePiece(eatingPiece(newBoard, newRow, newCol)));
+      if (
+        isKing &&
+        ((newCol === 10 && (newRow === 0 || newRow === 10)) ||
+          (newCol === 0 && (newRow === 0 || newRow === 10)))
+      ) {
+        dispatch(setWinner(pieceType.dark));
+      }
       dispatch(passTurn(isDark));
     }
     setReverse(true);

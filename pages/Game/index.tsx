@@ -15,7 +15,9 @@ export const Game = () => {
   const winner = useAppSelector((state) => state.gameState.winner);
 
   useEffect(() => {
-    setModalIsVisible(true);
+    if (winner) {
+      setModalIsVisible(true);
+    }
   }, [winner]);
 
   const newGame = () => {
@@ -29,7 +31,10 @@ export const Game = () => {
       </Pressable>
       <CustomModal
         modalIsVisible={modalIsVisible}
-        closeModal={() => setModalIsVisible(false)}
+        closeModal={() => {
+          setModalIsVisible(false);
+          newGame();
+        }}
         text={`Fine partita \n Ha vinto il giocatore ${
           winner === pieceType.light ? "attaccante" : "in difesa"
         } `}
