@@ -8,7 +8,12 @@ import { useEffect } from "react";
 export const Game = () => {
   const dispatch = useAppDispatch();
   const board = useAppSelector((state) => state.board.board);
-  const darkTurn = useAppSelector((state) => state.board.darkTurn);
+  const darkTurn = useAppSelector((state) => state.gameState.darkTurn);
+  const winner = useAppSelector(state=> state.gameState.winner)
+
+  useEffect(()=> {
+    
+  },[winner])
 
   const newGame = () => {
     dispatch(setNewGame(startGame(board)));

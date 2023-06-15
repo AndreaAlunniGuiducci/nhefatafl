@@ -2,16 +2,16 @@ import { View } from "react-native";
 import { styles } from "./styles";
 import Draggable from "react-native-draggable";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
-import { movePiece, passTurn } from "../../store/slices/boardSlice";
+import { movePiece } from "../../store/slices/boardSlice";
 import { pieceType, rangeNumber } from "../../utils/utils";
 import { useState } from "react";
+import { passTurn, setWinner } from "../../store/slices/gameAction";
 
 export const Piece = ({ isDark, isKing, position }: any) => {
   const dispatch = useAppDispatch();
   const pieceMeasure = 25;
   const board = useAppSelector((state) => state.board.board);
   const colorTheme = useAppSelector((state) => state.board.colorTheme);
-  const darkTurn = useAppSelector((state) => state.board.darkTurn);
   const bgColor =
     isDark || isKing ? colorTheme.darkPiece : colorTheme.lightPiece;
   const [reverse, setReverse] = useState(false);
@@ -172,8 +172,6 @@ export const Piece = ({ isDark, isKing, position }: any) => {
             board[newCol - 1][newRow - 1]?.piece === pieceType.light ||
             (board[newCol - 1][newRow - 1]?.row === 5 &&
               board[newCol - 1][newRow - 1]?.col === 5))) ||
-
-
         (rowToCheck[3]?.piece === pieceType.king &&
           (!rowToCheck[4] ||
             rowToCheck[4].piece === pieceType.light ||
@@ -186,8 +184,6 @@ export const Piece = ({ isDark, isKing, position }: any) => {
             board[newCol - 1][newRow + 1]?.piece === pieceType.light ||
             (board[newCol - 1][newRow + 1]?.row === 5 &&
               board[newCol - 1][newRow + 1]?.col === 5))) ||
-
-
         (colToCheck[3]?.piece === pieceType.king &&
           (!colToCheck[4] ||
             colToCheck[4].piece === pieceType.light ||
@@ -200,8 +196,6 @@ export const Piece = ({ isDark, isKing, position }: any) => {
             board[newCol + 1][newRow - 1]?.piece === pieceType.light ||
             (board[newCol + 1][newRow - 1]?.row === 5 &&
               board[newCol + 1][newRow - 1]?.col === 5))) ||
-
-
         (colToCheck[1]?.piece === pieceType.king &&
           (!colToCheck[0] ||
             colToCheck[0].piece === pieceType.light ||
@@ -215,7 +209,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
             (board[newCol - 1][newRow - 1]?.row === 5 &&
               board[newCol - 1][newRow - 1]?.col === 5)))
       ) {
-        debugger;
+        dispatch(setWinner(pieceType.light));
       }
     }
 
