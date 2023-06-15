@@ -6,6 +6,8 @@ import { startGame } from "../../utils/startGame";
 import { useEffect, useState } from "react";
 import { CustomModal } from "../../components/customModal";
 import { pieceType } from "../../utils/utils";
+import { styles } from "./styles";
+import { Header } from "../../components/Header";
 
 export const Game = () => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -26,9 +28,7 @@ export const Game = () => {
 
   return (
     <View>
-      <Pressable onPress={newGame}>
-        <Text>New Game</Text>
-      </Pressable>
+      <Header newGame={newGame} />
       <CustomModal
         modalIsVisible={modalIsVisible}
         closeModal={() => {
@@ -39,11 +39,11 @@ export const Game = () => {
           winner === pieceType.light ? "attaccante" : "in difesa"
         } `}
       />
-      <View style={{ flexDirection: "row" }}>
+      <View style={styles.board}>
         <Board />
       </View>
       <View>
-        <Text>
+        <Text style={styles.turnText}>
           È il turno {darkTurn ? "dei difensori" : "degli attaccanti"}
         </Text>
       </View>

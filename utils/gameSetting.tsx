@@ -8,3 +8,10 @@ export const colorTheme = {
     darkPiece: "#724f10",
   },
 };
+
+export const gameDimension = {
+  classic:{
+    boxDimension: 30,
+    pieceDimension: 25,
+  }
+}

@@ -6,10 +6,11 @@ import { movePiece } from "../../store/slices/boardSlice";
 import { pieceType, rangeNumber } from "../../utils/utils";
 import { useState } from "react";
 import { passTurn, setWinner } from "../../store/slices/gameAction";
+import { gameDimension } from "../../utils/gameSetting";
 
 export const Piece = ({ isDark, isKing, position }: any) => {
   const dispatch = useAppDispatch();
-  const pieceMeasure = 25;
+  const pieceMeasure = gameDimension['classic'].pieceDimension;
   const board = useAppSelector((state) => state.board.board);
   const colorTheme = useAppSelector((state) => state.board.colorTheme);
   const darkTurn = useAppSelector((state) => state.gameState.darkTurn);
