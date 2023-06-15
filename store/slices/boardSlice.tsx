@@ -13,13 +13,13 @@ const board = col.map((colItem, index) =>
 interface boardState {
   board: any[];
   colorTheme: any;
-  turn: boolean;
+  darkTurn: boolean;
 }
 
 const initialState: boardState = {
   board: board,
   colorTheme: colorTheme.classic,
-  turn: true,
+  darkTurn: true,
 };
 
 const boardSlice = createSlice({
@@ -33,7 +33,7 @@ const boardSlice = createSlice({
       state.board = action.payload;
     },
     passTurn(state, action: PayloadAction<any>) {
-      state.turn = !action.payload;
+      state.darkTurn = !action.payload;
     },
   },
 });

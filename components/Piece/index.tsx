@@ -4,14 +4,14 @@ import Draggable from "react-native-draggable";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
 import { movePiece, passTurn } from "../../store/slices/boardSlice";
 import { pieceType, rangeNumber } from "../../utils/utils";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const Piece = ({ isDark, isKing, position }: any) => {
   const dispatch = useAppDispatch();
   const pieceMeasure = 25;
   const board = useAppSelector((state) => state.board.board);
   const colorTheme = useAppSelector((state) => state.board.colorTheme);
-  const turn = useAppSelector((state) => state.board.turn);
+  const darkTurn = useAppSelector((state) => state.board.darkTurn);
   const bgColor =
     isDark || isKing ? colorTheme.darkPiece : colorTheme.lightPiece;
   const [reverse, setReverse] = useState(false);
@@ -99,6 +99,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         })
       );
     };
+    // cattura pezzi semplici
     if (
       (rowToCheck[2].piece === rowToCheck[0]?.piece ||
         (rowToCheck[0]?.row === 0 &&
@@ -151,6 +152,26 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     ) {
       newBoard = pieceEated(colToCheck, 3);
     }
+    // cattura del re
+    if (
+      rowToCheck[2].piece === pieceType.light ||
+      colToCheck[2].piece === pieceType.light
+    ) {
+      if (
+        rowToCheck[1].piece === pieceType.king &&
+
+        rowToCheck[2].piece === pieceType.light &&
+
+        (rowToCheck[0].piece === pieceType.light ||
+          !rowToCheck[0] ||
+          (rowToCheck[0].row === 5 &&
+            rowToCheck[0].col === 5)) &&
+            board[newCol + 1][newRow - 1].piece === pieceType.light &&
+            board[newCol - 1][newRow - 1].piece === pieceType.light
+      ) {
+        debugger;
+      }
+    }
 
     return newBoard;
   };
@@ -171,7 +192,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     const limit = limitParam(oldRow, newRow, oldCol, newCol);
 
     if (
-      turn === isDark &&
+      darkTurn === isDark &&
       (newRow !== oldRow || newCol !== oldCol) &&
       ((newRow === oldRow && newCol !== oldCol) ||
         (newRow !== oldRow && newCol === oldCol)) &&

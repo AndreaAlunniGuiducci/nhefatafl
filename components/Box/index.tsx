@@ -12,7 +12,7 @@ export const Box = ({ style, piece, position }: any) => {
       return <Piece isDark={false} position={position} />;
     }
     if (piece === pieceType.king) {
-      return <Piece isKing={true} position={position} />;
+      return <Piece isKing={true} isDark={true} position={position} />;
     } else {
       return piece;
     }

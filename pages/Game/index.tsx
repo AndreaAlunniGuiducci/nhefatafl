@@ -8,7 +8,7 @@ import { useEffect } from "react";
 export const Game = () => {
   const dispatch = useAppDispatch();
   const board = useAppSelector((state) => state.board.board);
-  const turn = useAppSelector((state) => state.board.turn);
+  const darkTurn = useAppSelector((state) => state.board.darkTurn);
 
   const newGame = () => {
     dispatch(setNewGame(startGame(board)));
@@ -23,7 +23,9 @@ export const Game = () => {
         <Board />
       </View>
       <View>
-        <Text>È il turno {!turn ? "degli attaccanti" : "dei difensori"} </Text>
+        <Text>
+          È il turno {darkTurn ? "dei difensori" : "degli attaccanti"}
+        </Text>
       </View>
     </View>
   );
