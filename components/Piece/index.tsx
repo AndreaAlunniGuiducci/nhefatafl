@@ -99,6 +99,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         })
       );
     };
+
     // cattura pezzi semplici
     if (
       (rowToCheck[2].piece === rowToCheck[0]?.piece ||
@@ -152,22 +153,68 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     ) {
       newBoard = pieceEated(colToCheck, 3);
     }
+
     // cattura del re
     if (
       rowToCheck[2].piece === pieceType.light ||
       colToCheck[2].piece === pieceType.light
     ) {
+      debugger;
       if (
-        rowToCheck[1].piece === pieceType.king &&
+        (rowToCheck[1]?.piece === pieceType.king &&
+          (!rowToCheck[0] ||
+            rowToCheck[0].piece === pieceType.light ||
+            (rowToCheck[0].row === 5 && rowToCheck[0].col === 5)) &&
+          (!board[newCol + 1] ||
+            board[newCol + 1][newRow - 1].piece === pieceType.light ||
+            (board[newCol + 1][newRow - 1].row === 5 &&
+              board[newCol + 1][newRow - 1].col === 5)) &&
+          (!board[newCol - 1] ||
+            board[newCol - 1][newRow - 1].piece === pieceType.light ||
+            (board[newCol - 1][newRow - 1].row === 5 &&
+              board[newCol - 1][newRow - 1].col === 5))) ||
 
-        rowToCheck[2].piece === pieceType.light &&
 
-        (rowToCheck[0].piece === pieceType.light ||
-          !rowToCheck[0] ||
-          (rowToCheck[0].row === 5 &&
-            rowToCheck[0].col === 5)) &&
-            board[newCol + 1][newRow - 1].piece === pieceType.light &&
-            board[newCol - 1][newRow - 1].piece === pieceType.light
+        (rowToCheck[3]?.piece === pieceType.king &&
+          (!rowToCheck[4] ||
+            rowToCheck[4].piece === pieceType.light ||
+            (rowToCheck[4].row === 5 && rowToCheck[4].col === 5)) &&
+          (!board[newCol + 1] ||
+            board[newCol + 1][newRow + 1].piece === pieceType.light ||
+            (board[newCol + 1][newRow + 1].row === 5 &&
+              board[newCol + 1][newRow + 1].col === 5)) &&
+          (!board[newCol - 1] ||
+            board[newCol - 1][newRow + 1].piece === pieceType.light ||
+            (board[newCol - 1][newRow + 1].row === 5 &&
+              board[newCol - 1][newRow + 1].col === 5))) ||
+
+
+        (colToCheck[3]?.piece === pieceType.king &&
+          (!colToCheck[4] ||
+            colToCheck[4].piece === pieceType.light ||
+            (colToCheck[4].row === 5 && colToCheck[4].col === 5)) &&
+          (!board[newCol + 1] ||
+            board[newCol + 1][newRow + 1].piece === pieceType.light ||
+            (board[newCol + 1][newRow + 1].row === 5 &&
+              board[newCol + 1][newRow + 1].col === 5)) &&
+          (!board[newCol + 1] ||
+            board[newCol + 1][newRow - 1].piece === pieceType.light ||
+            (board[newCol + 1][newRow - 1].row === 5 &&
+              board[newCol + 1][newRow - 1].col === 5))) ||
+
+              
+        (colToCheck[1]?.piece === pieceType.king &&
+          (!colToCheck[0] ||
+            colToCheck[0].piece === pieceType.light ||
+            (colToCheck[0].row === 5 && colToCheck[0].col === 5)) &&
+          (!board[newCol - 1] ||
+            board[newCol - 1][newRow + 1].piece === pieceType.light ||
+            (board[newCol - 1][newRow + 1].row === 5 &&
+              board[newCol - 1][newRow + 1].col === 5)) &&
+          (!board[newCol - 1] ||
+            board[newCol - 1][newRow - 1].piece === pieceType.light ||
+            (board[newCol - 1][newRow - 1].row === 5 &&
+              board[newCol - 1][newRow - 1].col === 5)))
       ) {
         debugger;
       }
@@ -192,7 +239,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     const limit = limitParam(oldRow, newRow, oldCol, newCol);
 
     if (
-      darkTurn === isDark &&
+      // darkTurn === isDark &&
       (newRow !== oldRow || newCol !== oldCol) &&
       ((newRow === oldRow && newCol !== oldCol) ||
         (newRow !== oldRow && newCol === oldCol)) &&
