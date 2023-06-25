@@ -4,6 +4,23 @@
             "outputFile": "com.hnefatafl.app-mergeDebugResources-20:/values/values.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\Andrea\\Desktop\\Progetti\\React-native\\hnefatafl\\nhefatafl\\android\\app\\build\\generated\\res\\resValues\\debug\\values\\gradleResValues.xml",
+                    "from": {
+                        "startLines": "6,8",
+                        "startColumns": "4,4",
+                        "startOffsets": "159,265",
+                        "endColumns": "63,68",
+                        "endOffsets": "218,329"
+                    },
+                    "to": {
+                        "startLines": "285,286",
+                        "startColumns": "4,4",
+                        "startOffsets": "18228,18292",
+                        "endColumns": "63,68",
+                        "endOffsets": "18287,18356"
+                    }
+                },
+                {
                     "source": "C:\\Users\\Andrea\\.gradle\\caches\\transforms-3\\8a384341752d328d6389029a8be9e815\\transformed\\jetified-autofill-1.1.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,19,20,27,32,37,44,53",
@@ -20,6 +37,25 @@
                         "endLines": "157,1829,1976,1983,1988,1993,2000,2009,2676",
                         "endColumns": "67,12,59,12,12,12,12,12,24",
                         "endOffsets": "10667,122503,133495,133877,134157,134439,134823,135321,157481"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Andrea\\Desktop\\Progetti\\React-native\\hnefatafl\\nhefatafl\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "273"
+                    },
+                    "to": {
+                        "startLines": "387",
+                        "startColumns": "4",
+                        "startOffsets": "26959",
+                        "endLines": "390",
+                        "endColumns": "12",
+                        "endOffsets": "27137"
                     }
                 },
                 {
@@ -76,23 +112,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Andrea\\Desktop\\Progetti\\React-native\\hnefatafl\\android\\app\\build\\generated\\res\\resValues\\debug\\values\\gradleResValues.xml",
-                    "from": {
-                        "startLines": "6,8",
-                        "startColumns": "4,4",
-                        "startOffsets": "159,265",
-                        "endColumns": "63,68",
-                        "endOffsets": "218,329"
-                    },
-                    "to": {
-                        "startLines": "285,286",
-                        "startColumns": "4,4",
-                        "startOffsets": "18228,18292",
-                        "endColumns": "63,68",
-                        "endOffsets": "18287,18356"
-                    }
-                },
-                {
                     "source": "C:\\Users\\Andrea\\.gradle\\caches\\transforms-3\\32125a562c5cc74b550ec81d7709fe1d\\transformed\\jetified-startup-runtime-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2",
@@ -107,6 +126,23 @@
                         "startOffsets": "20370",
                         "endColumns": "82",
                         "endOffsets": "20448"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Andrea\\Desktop\\Progetti\\React-native\\hnefatafl\\nhefatafl\\android\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "17",
+                        "endColumns": "46",
+                        "endOffsets": "59"
+                    },
+                    "to": {
+                        "startLines": "317",
+                        "startColumns": "4",
+                        "startOffsets": "20453",
+                        "endColumns": "46",
+                        "endOffsets": "20495"
                     }
                 },
                 {
@@ -126,42 +162,6 @@
                         "endLines": "2151,2157,2167,3369,3373",
                         "endColumns": "24,24,24,24,24",
                         "endOffsets": "140366,140544,140828,179172,179299"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Andrea\\Desktop\\Progetti\\React-native\\hnefatafl\\android\\app\\src\\main\\res\\values\\strings.xml",
-                    "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "17",
-                        "endColumns": "46",
-                        "endOffsets": "59"
-                    },
-                    "to": {
-                        "startLines": "317",
-                        "startColumns": "4",
-                        "startOffsets": "20453",
-                        "endColumns": "46",
-                        "endOffsets": "20495"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Andrea\\Desktop\\Progetti\\React-native\\hnefatafl\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "273"
-                    },
-                    "to": {
-                        "startLines": "387",
-                        "startColumns": "4",
-                        "startOffsets": "26959",
-                        "endLines": "390",
-                        "endColumns": "12",
-                        "endOffsets": "27137"
                     }
                 },
                 {
