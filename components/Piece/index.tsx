@@ -121,7 +121,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         (rowToCheck[4]?.row === 10 &&
           (rowToCheck[4]?.col === 10 || rowToCheck[4]?.col === 0)) ||
         (rowToCheck[4]?.row === 5 &&
-          rowToCheck[4]?.row === 5 &&
+          rowToCheck[4]?.col === 5 &&
           !rowToCheck[4]?.piece)) &&
       rowToCheck[3].piece &&
       rowToCheck[3].piece !== pieceType.king &&

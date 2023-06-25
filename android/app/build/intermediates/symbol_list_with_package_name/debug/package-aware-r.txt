@@ -961,7 +961,9 @@ layout support_simple_spinner_dropdown_item
 menu example_menu
 menu example_menu2
 mipmap ic_launcher
-mipmap ic_launcher_round
+mipmap ic_launcher_background
+mipmap ic_launcher_foreground
+mipmap ic_launcher_monochrome
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
