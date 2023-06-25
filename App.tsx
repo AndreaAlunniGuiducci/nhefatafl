@@ -5,17 +5,28 @@
  * @format
  */
 
-import React from 'react';
-import {SafeAreaView} from 'react-native';
-import {Game} from './pages/Game';
-import {Provider} from 'react-redux';
-import { store } from './store/store';
+import React from "react";
+import { SafeAreaView } from "react-native";
+
+import { Home } from "./pages/Game/Home";
+import { Game } from "./pages/Game";
+
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 function App(): JSX.Element {
+  const Stack = createNativeStackNavigator();
   return (
     <Provider store={store}>
       <SafeAreaView>
-        <Game />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name='Home' component={Home}/>
+          <Stack.Screen name='Game' component={Game}/>
+          </Stack.Navigator>
+        </NavigationContainer>
       </SafeAreaView>
     </Provider>
   );
