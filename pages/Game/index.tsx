@@ -8,6 +8,7 @@ import { CustomModal } from "../../components/customModal";
 import { pieceType } from "../../utils/utils";
 import { styles } from "./styles";
 import { Header } from "../../components/Header";
+import { passTurn } from "../../store/slices/gameAction";
 
 export const Game = () => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -24,6 +25,7 @@ export const Game = () => {
 
   const newGame = () => {
     dispatch(setNewGame(startGame(board)));
+    dispatch(passTurn(false))
   };
 
   return (

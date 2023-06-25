@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { colorTheme } from "../../utils/gameSetting";
-import { pieceType } from "../../utils/utils";
 
 const row = Array.from(Array(11).keys());
 const col = Array.from(Array(11).keys());
