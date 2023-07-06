@@ -1,12 +1,12 @@
 import { View } from "react-native";
 import { styles } from "./styles";
 import Draggable from "react-native-draggable";
-import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
-import { movePiece } from "../../store/slices/boardSlice";
-import { pieceType, rangeNumber } from "../../utils/utils";
+import { useAppDispatch, useAppSelector } from "../../../customHooks/reduxHooks";
+import { movePiece } from "../../../store/slices/boardSlice";
+import { pieceType, rangeNumber } from "../../../utils/utils";
 import { useState } from "react";
-import { passTurn, setWinner } from "../../store/slices/gameAction";
-import { gameDimension } from "../../utils/gameSetting";
+import { passTurn, setWinner } from "../../../store/slices/gameAction";
+import { gameDimension } from "../../../utils/gameSetting";
 
 export const Piece = ({ isDark, isKing, position }: any) => {
   const dispatch = useAppDispatch();

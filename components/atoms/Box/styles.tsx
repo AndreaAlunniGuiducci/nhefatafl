@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { gameDimension } from "../../utils/gameSetting";
+import { gameDimension } from "../../../utils/gameSetting";
 
 export const styles = StyleSheet.create({
   box: {

@@ -1,9 +1,9 @@
 import { View } from "react-native";
-import { Box } from "../Box";
+import { Box } from "../../atoms/Box";
 import { styles } from "./styles";
-import { useAppSelector } from "../../customHooks/reduxHooks";
+import { useAppSelector } from "../../../customHooks/reduxHooks";
 import { useEffect } from "react";
-import { startGame } from "../../utils/startGame";
+import { startGame } from "../../../utils/startGame";
 
 export const Board = () => {
   const boardState = useAppSelector((state) => state.board.board);

@@ -1,10 +1,10 @@
 import { Pressable, Text, View } from "react-native";
-import { Board } from "../../components/Board";
+import { Board } from "../../components/organism/Board";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
 import { setNewGame } from "../../store/slices/boardSlice";
 import { startGame } from "../../utils/startGame";
 import { useEffect, useState } from "react";
-import { CustomModal } from "../../components/customModal";
+import { CustomModal } from "../../components/organism/CustomModal/customModal";
 import { pieceType } from "../../utils/utils";
 import { styles } from "./styles";
 import { Header } from "../../components/Header";

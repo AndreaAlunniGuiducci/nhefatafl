@@ -1,7 +1,7 @@
 import { Pressable } from "react-native";
 import { styles } from "./styles";
 import { Piece } from "../Piece";
-import { pieceType } from "../../utils/utils";
+import { pieceType } from "../../../utils/utils";
 
 export const Box = ({ style, piece, position }: any) => {
   const pieces = () => {
