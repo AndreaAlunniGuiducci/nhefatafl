@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { CustomModal } from "../../components/organism/CustomModal/customModal";
 import { pieceType } from "../../utils/utils";
 import { styles } from "./styles";
-import { Header } from "../../components/Header";
+import { Header } from "../../components/organism/Header";
 import { passTurn } from "../../store/slices/gameAction";
 
 export const Game = () => {
@@ -30,12 +30,11 @@ export const Game = () => {
 
   return (
     <View>
-      <Header newGame={newGame} />
       <CustomModal
         modalIsVisible={modalIsVisible}
         closeModal={() => {
           setModalIsVisible(false);
-          newGame();
+          // newGame(); // TODO: quando si chiude la modale si riavvia subito una partita???
         }}
         text={`Fine partita \n Ha vinto il giocatore ${
           winner === pieceType.light ? "attaccante" : "in difesa"
