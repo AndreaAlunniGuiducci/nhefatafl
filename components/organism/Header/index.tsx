@@ -1,32 +1,48 @@
-import { Pressable, Text, View } from "react-native";
-import { styles } from "./styles";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../customHooks/reduxHooks";
-import { startGame } from "../../../utils/startGame";
-import { passTurn } from "../../../store/slices/gameAction";
-import { setNewGame } from "../../../store/slices/boardSlice";
+import {useState} from 'react';
+import {Button, Text, View} from 'react-native';
+import {styles} from './styles';
+import {Menu} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/Octicons';
 
-export const Header = ({navigation}: any) => {
-  const dispatch = useAppDispatch();
+export const Header = ({navigation, menuItem}: any) => {
+  const routes = navigation.getState().routes;
+  const title = routes.length > 0 ? routes[routes.length - 1].name : '';
+  const instruction = menuItem.find((i: any) => i.title === title)?.description;
 
-  const board = useAppSelector((state) => state.board.board);
-
-  const newGame = () => {
-    navigation.navigate('Game')
-    dispatch(setNewGame(startGame(board)));
-    dispatch(passTurn(false));
-  };
+  const [modalIsVisible, setModalVisible] = useState(false);
+  const openModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
+  const [visible, setVisible] = useState(false);
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
 
   return (
     <View style={styles.header}>
-      <Pressable onPress={newGame}>
-        <Text style={styles.textNewGame}>New Game</Text>
-      </Pressable>
-      <Pressable onPress={()=>{navigation.navigate('Regole')}}>
-        <Text style={styles.textNewGame}>Regole</Text>
-      </Pressable>
+      <Text style={styles.headerTitle}>{title}</Text>
+      <View style={styles.buttonWrapper}>
+        <Text>
+          <Icon name="info" size={30} onPress={openModal} />
+        </Text>
+        <Menu
+          visible={visible}
+          onDismiss={closeMenu}
+          anchor={
+            <Text style={styles.textMenu} onPress={openMenu}>
+              Menu
+            </Text>
+          }>
+          {menuItem.map((item: any, index: number) => (
+            <Menu.Item
+              key={index}
+              onPress={() => {
+                closeMenu();
+                navigation.navigate(item.title);
+              }}
+              title={item.title}
+            />
+          ))}
+        </Menu>
+      </View>
     </View>
   );
 };

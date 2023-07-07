@@ -1,4 +1,5 @@
 import { Game } from "../pages/Game";
+import { Home } from "../pages/Home";
 import { Rules } from "../pages/Rules";
 
 export const menuItem = [
@@ -9,5 +10,9 @@ export const menuItem = [
   {
     title: "Regole",
     component: Rules,
+  },
+  {
+    title: "Home",
+    component: Home,
   },
 ];

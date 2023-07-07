@@ -15,34 +15,37 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Header } from "./components/organism/Header";
 import { menuItem } from "./utils/menuItem";
 import { mainStyles } from "./mainStyle";
+import { PaperProvider } from "react-native-paper";
 
 function App(): JSX.Element {
   const Stack = createNativeStackNavigator();
 
   return (
     <Provider store={store}>
-      <SafeAreaView style={mainStyles.mainView}>
-        <StatusBar hidden={true} />
-        <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName="Game"
-            screenOptions={{
-              header: (HeaderProps) => (
-                <Header navigation={HeaderProps.navigation} />
-              ),
-              animation: "none",
-            }}
-          >
-            {menuItem.map((item, index) => (
-              <Stack.Screen
-                key={index}
-                name={item.title}
-                component={item.component}
-              />
-            ))}
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaView>
+      <PaperProvider>
+        <SafeAreaView style={mainStyles.mainView}>
+          <StatusBar hidden={true} />
+          <NavigationContainer>
+            <Stack.Navigator
+              initialRouteName="Game"
+              screenOptions={{
+                header: (HeaderProps) => (
+                  <Header navigation={HeaderProps.navigation} menuItem={menuItem}/>
+                ),
+                animation: "none",
+              }}
+            >
+              {menuItem.map((item, index) => (
+                <Stack.Screen
+                  key={index}
+                  name={item.title}
+                  component={item.component}
+                />
+              ))}
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SafeAreaView>
+      </PaperProvider>
     </Provider>
   );
 }
