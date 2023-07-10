@@ -27,7 +27,7 @@ function App(): JSX.Element {
           <StatusBar hidden={true} />
           <NavigationContainer>
             <Stack.Navigator
-              initialRouteName="Game"
+              initialRouteName="Home"
               screenOptions={{
                 header: (HeaderProps) => (
                   <Header navigation={HeaderProps.navigation} menuItem={menuItem}/>

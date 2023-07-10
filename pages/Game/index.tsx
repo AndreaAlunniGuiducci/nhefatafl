@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { CustomModal } from "../../components/organism/CustomModal/customModal";
 import { pieceType } from "../../utils/utils";
 import { styles } from "./styles";
-import { Header } from "../../components/organism/Header";
 import { passTurn } from "../../store/slices/gameAction";
 
 export const Game = () => {
@@ -25,7 +24,7 @@ export const Game = () => {
 
   const newGame = () => {
     dispatch(setNewGame(startGame(board)));
-    dispatch(passTurn(false))
+    dispatch(passTurn(false));
   };
 
   return (

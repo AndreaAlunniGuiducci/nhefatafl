@@ -1,17 +1,13 @@
-import {useState} from 'react';
-import {Button, Text, View} from 'react-native';
-import {styles} from './styles';
-import {Menu} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Octicons';
+import { useState } from "react";
+import { Text, View } from "react-native";
+import { styles } from "./styles";
+import { Menu } from "react-native-paper";
+import Icon from "react-native-vector-icons/Entypo";
 
-export const Header = ({navigation, menuItem}: any) => {
+export const Header = ({ navigation, menuItem }: any) => {
   const routes = navigation.getState().routes;
-  const title = routes.length > 0 ? routes[routes.length - 1].name : '';
-  const instruction = menuItem.find((i: any) => i.title === title)?.description;
+  const title = routes.length > 0 ? routes[routes.length - 1].name : "";
 
-  const [modalIsVisible, setModalVisible] = useState(false);
-  const openModal = () => setModalVisible(true);
-  const closeModal = () => setModalVisible(false);
   const [visible, setVisible] = useState(false);
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
@@ -20,17 +16,15 @@ export const Header = ({navigation, menuItem}: any) => {
     <View style={styles.header}>
       <Text style={styles.headerTitle}>{title}</Text>
       <View style={styles.buttonWrapper}>
-        <Text>
-          <Icon name="info" size={30} onPress={openModal} />
-        </Text>
         <Menu
           visible={visible}
           onDismiss={closeMenu}
           anchor={
-            <Text style={styles.textMenu} onPress={openMenu}>
-              Menu
+            <Text style={styles.textMenu}>
+              <Icon name="menu" size={30} onPress={openMenu} />
             </Text>
-          }>
+          }
+        >
           {menuItem.map((item: any, index: number) => (
             <Menu.Item
               key={index}

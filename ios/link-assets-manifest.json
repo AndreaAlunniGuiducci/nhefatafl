@@ -1,0 +1,37 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Unbounded-Black.ttf",
+      "sha1": "085111190402672db49d7df414f7110c8940b9c8"
+    },
+    {
+      "path": "assets/fonts/Unbounded-Bold.ttf",
+      "sha1": "d744001a957b0fa9299b1135367b8198f6d39eb9"
+    },
+    {
+      "path": "assets/fonts/Unbounded-ExtraBold.ttf",
+      "sha1": "20ba0d7359c4a2ee508705feb12dfee6e3adb540"
+    },
+    {
+      "path": "assets/fonts/Unbounded-ExtraLight.ttf",
+      "sha1": "012629c90a5409769cbdd617cda177d8679a71ac"
+    },
+    {
+      "path": "assets/fonts/Unbounded-Light.ttf",
+      "sha1": "aa7d5e59511ffb441baadb2333bd16140ed8a2c2"
+    },
+    {
+      "path": "assets/fonts/Unbounded-Medium.ttf",
+      "sha1": "5055309df66a8651874f6512b9c080d87d3ea843"
+    },
+    {
+      "path": "assets/fonts/Unbounded-Regular.ttf",
+      "sha1": "3b49f8bd7e1751d18883cf0d587afe6f348931fe"
+    },
+    {
+      "path": "assets/fonts/Unbounded-SemiBold.ttf",
+      "sha1": "a23b97cab275aaa692956fdbbedc31b40b63b8f0"
+    }
+  ]
+}
