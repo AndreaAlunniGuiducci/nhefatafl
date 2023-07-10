@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { styles } from "./styles";
 import { Button } from "../../components/atoms/Button";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
@@ -9,8 +9,10 @@ import { passTurn } from "../../store/slices/gameAction";
 export const Home = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
   const board = useAppSelector((state) => state.board.board);
-  const darkTurn = useAppSelector((state) => state.gameState.darkTurn);
-  const winner = useAppSelector((state) => state.gameState.winner);
+
+  const goToRules = () => {
+    navigation.navigate("Rules");
+  };
 
   const newGame = () => {
     dispatch(setNewGame(startGame(board)));
@@ -21,11 +23,12 @@ export const Home = ({ navigation }: any) => {
   const resumeGame = () => {
     navigation.navigate("Game");
   };
+
   return (
     <View style={styles.homepage}>
       <Text style={styles.title}>HNEFATAFL</Text>
       <View style={styles.wrapperMenuVoices}>
-        <Button buttonContent={"Rules"} />
+        <Button buttonContent={"Rules"} buttonAction={goToRules} />
         <Button buttonContent={"New Game"} buttonAction={newGame} />
         <Button buttonContent={"Resume Game"} buttonAction={resumeGame} />
       </View>

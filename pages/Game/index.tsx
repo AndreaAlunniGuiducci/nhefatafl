@@ -15,6 +15,7 @@ export const Game = () => {
   const board = useAppSelector((state) => state.board.board);
   const darkTurn = useAppSelector((state) => state.gameState.darkTurn);
   const winner = useAppSelector((state) => state.gameState.winner);
+  const moves = useAppSelector((state) => state.gameState.moves);
 
   useEffect(() => {
     if (winner) {
@@ -46,6 +47,7 @@ export const Game = () => {
         <Text style={styles.turnText}>
           È il turno {darkTurn ? "dei difensori" : "degli attaccanti"}
         </Text>
+        {moves.length >0 && moves.map(item => {return <Text>{item.darkTurn ? 'Difensore ' : 'Attaccante '}muova da colonna {item.oldCol} riga {item.oldRow} a colonna {item.newCol} riga {item.newRow}</Text>})}
       </View>
     </View>
   );

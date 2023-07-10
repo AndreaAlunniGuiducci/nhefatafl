@@ -8,7 +8,7 @@ export const menuItem = [
     component: Game,
   },
   {
-    title: "Regole",
+    title: "Rules",
     component: Rules,
   },
   {

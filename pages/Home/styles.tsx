@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { windowsHeight } from "../../mainStyle";
 
 export const styles = StyleSheet.create({
@@ -16,12 +16,4 @@ export const styles = StyleSheet.create({
     justifyContent: "space-around",
     height: windowsHeight / 1.5,
   },
-  menuVoice:{
-    fontFamily: 'Unbounded-Light',
-    fontSize: 20,
-    padding: 15,
-    borderWidth: 1,
-    borderRadius: 20
-
-  }
 });

@@ -1,16 +1,23 @@
 import { View } from "react-native";
 import { styles } from "./styles";
 import Draggable from "react-native-draggable";
-import { useAppDispatch, useAppSelector } from "../../../customHooks/reduxHooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../customHooks/reduxHooks";
 import { movePiece } from "../../../store/slices/boardSlice";
 import { pieceType, rangeNumber } from "../../../utils/utils";
 import { useState } from "react";
-import { passTurn, setWinner } from "../../../store/slices/gameAction";
+import {
+  passTurn,
+  setMoves,
+  setWinner,
+} from "../../../store/slices/gameAction";
 import { gameDimension } from "../../../utils/gameSetting";
 
 export const Piece = ({ isDark, isKing, position }: any) => {
   const dispatch = useAppDispatch();
-  const pieceMeasure = gameDimension['classic'].pieceDimension;
+  const pieceMeasure = gameDimension["classic"].pieceDimension;
   const board = useAppSelector((state) => state.board.board);
   const colorTheme = useAppSelector((state) => state.board.colorTheme);
   const darkTurn = useAppSelector((state) => state.gameState.darkTurn);
@@ -268,6 +275,15 @@ export const Piece = ({ isDark, isKing, position }: any) => {
         dispatch(setWinner(pieceType.dark));
       }
       dispatch(passTurn(isDark));
+      dispatch(
+        setMoves({
+          piece: darkTurn,
+          oldCol: oldCol,
+          oldRow: oldRow,
+          newCol: newCol,
+          newRow: newRow,
+        })
+      );
     }
     setReverse(true);
   };
