@@ -47,7 +47,7 @@ export const Game = () => {
         <Text style={styles.turnText}>
           È il turno {darkTurn ? "dei difensori" : "degli attaccanti"}
         </Text>
-        {moves.length >0 && moves.map(item => {return <Text>{item.darkTurn ? 'Difensore ' : 'Attaccante '}muova da colonna {item.oldCol} riga {item.oldRow} a colonna {item.newCol} riga {item.newRow}</Text>})}
+        {moves.length >0 && moves.map(item => {return <Text>{item.piece ? 'Difensore ' : 'Attaccante '}muova da colonna {item.oldCol} riga {item.oldRow} a colonna {item.newCol} riga {item.newRow}</Text>})}
       </View>
     </View>
   );

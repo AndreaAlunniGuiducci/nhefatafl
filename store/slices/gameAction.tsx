@@ -25,6 +25,9 @@ const gameStateSlice = createSlice({
     setMoves(state, action: PayloadAction<any>) {
       state.moves = [...state.moves, action.payload];
     },
+    clearMoves(state) {
+      state.moves = [];
+    },
   },
 });
 
@@ -32,3 +35,4 @@ export default gameStateSlice.reducer;
 export const { passTurn } = gameStateSlice.actions;
 export const { setWinner } = gameStateSlice.actions;
 export const { setMoves } = gameStateSlice.actions;
+export const { clearMoves } = gameStateSlice.actions;
