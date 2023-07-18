@@ -293,6 +293,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
       <Draggable
         x={-pieceMeasure / 2}
         y={-pieceMeasure / 2}
+        z={5}
         isCircle={!isKing}
         renderSize={pieceMeasure}
         renderColor={bgColor}

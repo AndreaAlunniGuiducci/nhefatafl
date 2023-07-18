@@ -4,7 +4,7 @@ import { Button } from "../../components/atoms/Button";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
 import { setNewGame } from "../../store/slices/boardSlice";
 import { startGame } from "../../utils/startGame";
-import { clearMoves, passTurn, setMoves } from "../../store/slices/gameAction";
+import { clearMoves, passTurn, setWinner } from "../../store/slices/gameAction";
 
 export const Home = ({ navigation }: any) => {
   const dispatch = useAppDispatch();
@@ -16,6 +16,7 @@ export const Home = ({ navigation }: any) => {
 
   const newGame = () => {
     dispatch(setNewGame(startGame(board)));
+    dispatch(setWinner(false))
     dispatch(passTurn(false));
     dispatch(clearMoves())
     navigation.navigate("Game");

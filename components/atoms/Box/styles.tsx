@@ -8,5 +8,6 @@ export const styles = StyleSheet.create({
     width: gameDimension["classic"].boxDimension,
     alignItems: "center",
     justifyContent: "center",
+    zIndex: 1
   },
 });

@@ -1,8 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { pieceType } from "../../utils/utils";
 
 interface gameState {
   darkTurn: boolean;
-  winner: any;
+  winner: "dark" | "light" | null;
   moves: any[];
 }
 

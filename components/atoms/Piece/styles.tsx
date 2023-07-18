@@ -2,6 +2,6 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   dragPiece:{
-    zIndex: 999
+    zIndex: 5
   }
 });

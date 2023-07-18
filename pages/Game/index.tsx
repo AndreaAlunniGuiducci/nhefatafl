@@ -9,7 +9,7 @@ import { pieceType } from "../../utils/utils";
 import { styles } from "./styles";
 import { passTurn } from "../../store/slices/gameAction";
 
-export const Game = () => {
+export const Game = ({ navigation }: any) => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const dispatch = useAppDispatch();
   const board = useAppSelector((state) => state.board.board);
@@ -34,7 +34,7 @@ export const Game = () => {
         modalIsVisible={modalIsVisible}
         closeModal={() => {
           setModalIsVisible(false);
-          // newGame(); // TODO: quando si chiude la modale si riavvia subito una partita???
+          navigation.navigate("Home");
         }}
         text={`Fine partita \n Ha vinto il giocatore ${
           winner === pieceType.light ? "attaccante" : "in difesa"
@@ -47,7 +47,16 @@ export const Game = () => {
         <Text style={styles.turnText}>
           È il turno {darkTurn ? "dei difensori" : "degli attaccanti"}
         </Text>
-        {moves.length >0 && moves.map(item => {return <Text>{item.piece ? 'Difensore ' : 'Attaccante '}muova da colonna {item.oldCol} riga {item.oldRow} a colonna {item.newCol} riga {item.newRow}</Text>})}
+        {moves.length > 0 &&
+          moves.map((item, index) => {
+            return (
+              <Text key={index}>
+                {item.piece ? "Difensore " : "Attaccante "}muova da colonna{" "}
+                {item.oldCol} riga {item.oldRow} a colonna {item.newCol} riga{" "}
+                {item.newRow}
+              </Text>
+            );
+          })}
       </View>
     </View>
   );
