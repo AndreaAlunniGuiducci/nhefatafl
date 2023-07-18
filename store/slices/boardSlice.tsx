@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { colorTheme } from "../../utils/gameSetting";
 
-const row = Array.from(Array(11).keys());
-const col = Array.from(Array(11).keys());
-const board = col.map((colItem, index) =>
-  row.map((rowItem, index) => {
+const row = Array.from(Array(12).keys());
+const col = Array.from(Array(12).keys());
+const board = col.map((colItem, index) =>{
+  return row.map((rowItem, index) => {
     return { row: rowItem, col: colItem, piece: null };
   })
-);
+});
 
 interface boardState {
   board: any[];
