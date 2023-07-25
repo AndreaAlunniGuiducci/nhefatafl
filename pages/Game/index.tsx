@@ -5,7 +5,7 @@ import { setNewGame } from "../../store/slices/boardSlice";
 import { startGame } from "../../utils/startGame";
 import { useEffect, useState } from "react";
 import { CustomModal } from "../../components/organism/CustomModal/customModal";
-import { pieceType } from "../../utils/utils";
+import { letter, pieceType } from "../../utils/utils";
 import { styles } from "./styles";
 import { passTurn } from "../../store/slices/gameAction";
 
@@ -51,9 +51,8 @@ export const Game = ({ navigation }: any) => {
           moves.map((item, index) => {
             return (
               <Text key={index}>
-                {item.piece ? "Difensore " : "Attaccante "}muova da colonna{" "}
-                {item.oldCol} riga {item.oldRow} a colonna {item.newCol} riga{" "}
-                {item.newRow}
+                {item.piece ? "Difensore " : "Attaccante "}muove da{" "}
+                {letter[item.oldRow]} {item.oldCol} a {letter[item.newRow]} {item.newCol}
               </Text>
             );
           })}
