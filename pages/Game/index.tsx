@@ -8,6 +8,7 @@ import { CustomModal } from "../../components/organism/CustomModal/customModal";
 import { letter, pieceType } from "../../utils/utils";
 import { styles } from "./styles";
 import { passTurn } from "../../store/slices/gameAction";
+import { mainStyles } from "../../mainStyle";
 
 export const Game = ({ navigation }: any) => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -29,7 +30,7 @@ export const Game = ({ navigation }: any) => {
   };
 
   return (
-    <View>
+    <View style={mainStyles.page}>
       <CustomModal
         modalIsVisible={modalIsVisible}
         closeModal={() => {
@@ -52,7 +53,13 @@ export const Game = ({ navigation }: any) => {
             return (
               <Text key={index}>
                 {item.piece ? "Difensore " : "Attaccante "}muove da{" "}
-                {letter[item.oldRow]} {item.oldCol} a {letter[item.newRow]} {item.newCol}
+                <Text style={styles.piecePosition}>
+                  {letter[item.oldRow]} {item.oldCol}
+                </Text>{" "}
+                a{" "}
+                <Text style={styles.piecePosition}>
+                  {letter[item.newRow]} {item.newCol}
+                </Text>{" "}
               </Text>
             );
           })}

@@ -9,4 +9,7 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16
   },
+  piecePosition:{
+    fontWeight: "bold"
+  }
 });

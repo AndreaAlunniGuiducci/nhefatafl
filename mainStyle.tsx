@@ -11,4 +11,8 @@ export const mainStyles = StyleSheet.create({
     backgroundColor: bgColorHeader,
     height: windowsHeight,
   },
+  page:{
+    paddingVertical: 5,
+    paddingHorizontal: 10
+  }
 });
