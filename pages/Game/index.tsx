@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import { Board } from "../../components/organism/Board";
 import { useAppDispatch, useAppSelector } from "../../customHooks/reduxHooks";
 import { setNewGame } from "../../store/slices/boardSlice";
@@ -9,6 +9,7 @@ import { letter, pieceType } from "../../utils/utils";
 import { styles } from "./styles";
 import { passTurn } from "../../store/slices/gameAction";
 import { mainStyles } from "../../mainStyle";
+import { MovesHistory } from "../../components/organism/MovesHistory";
 
 export const Game = ({ navigation }: any) => {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -44,26 +45,7 @@ export const Game = ({ navigation }: any) => {
       <View style={styles.board}>
         <Board />
       </View>
-      <View>
-        <Text style={styles.turnText}>
-          È il turno {darkTurn ? "dei difensori" : "degli attaccanti"}
-        </Text>
-        {moves.length > 0 &&
-          moves.map((item, index) => {
-            return (
-              <Text key={index}>
-                {item.piece ? "Difensore " : "Attaccante "}muove da{" "}
-                <Text style={styles.piecePosition}>
-                  {letter[item.oldRow]} {item.oldCol}
-                </Text>{" "}
-                a{" "}
-                <Text style={styles.piecePosition}>
-                  {letter[item.newRow]} {item.newCol}
-                </Text>{" "}
-              </Text>
-            );
-          })}
-      </View>
+      <MovesHistory moves={moves} darkTurn={darkTurn}/>
     </View>
   );
 };
