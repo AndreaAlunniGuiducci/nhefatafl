@@ -75,6 +75,70 @@ export const Piece = ({ isDark, isKing, position }: any) => {
     }
   };
 
+
+  const move = (oldPosition: any, newPosition: any) => {
+    const oldRow = oldPosition.row;
+    const oldCol = oldPosition.col;
+    const newRow = rangeNumber(
+      oldRow + Math.trunc(newPosition.y / pieceMeasure),
+      0,
+      10
+    );
+    const newCol = rangeNumber(
+      oldCol + Math.trunc(newPosition.x / pieceMeasure),
+      0,
+      10
+    );
+    const limit = limitParam(oldRow, newRow, oldCol, newCol);
+
+    if (
+      darkTurn === isDark &&
+      (newRow !== oldRow || newCol !== oldCol) &&
+      ((newRow === oldRow && newCol !== oldCol) ||
+        (newRow !== oldRow && newCol === oldCol)) &&
+      ((limit?.start.col < newCol && limit?.end.col > newCol) ||
+        (limit?.start.row < newRow && limit?.end.row > newRow))
+    ) {
+      const newBoard = board.map((col) =>
+        col.map((row: any) => {
+          if (oldCol === row.col && oldRow === row.row) {
+            return { ...row, piece: null };
+          }
+          if (newCol === row.col && newRow === row.row && !row.piece) {
+            return {
+              ...row,
+              piece: isKing
+                ? pieceType.king
+                : isDark
+                ? pieceType.dark
+                : pieceType.light,
+            };
+          }
+          return row;
+        })
+      );
+      dispatch(movePiece(eatingPiece(newBoard, newRow, newCol)));
+      if (
+        isKing &&
+        ((newCol === 10 && (newRow === 0 || newRow === 10)) ||
+          (newCol === 0 && (newRow === 0 || newRow === 10)))
+      ) {
+        dispatch(setWinner(pieceType.dark));
+      }
+      dispatch(passTurn(isDark));
+      dispatch(
+        setMoves({
+          piece: darkTurn,
+          oldCol: oldCol,
+          oldRow: oldRow,
+          newCol: newCol,
+          newRow: newRow,
+        })
+      );
+    }
+    setReverse(true);
+  };
+
   const eatingPiece = (board: any, newRow: number, newCol: number) => {
     const rows = board[newCol];
     const rowToCheck = [
@@ -95,6 +159,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
       columns[newCol + 2],
     ];
     let newBoard = board;
+    
     const pieceEated = (arrayToChek: any, index: number) => {
       return newBoard.map((col: any) =>
         col.map((row: any) => {
@@ -102,6 +167,17 @@ export const Piece = ({ isDark, isKing, position }: any) => {
             row.row === arrayToChek[index].row &&
             row.col === arrayToChek[index].col
           ) {
+            dispatch(
+              setMoves({
+                piece: darkTurn,
+                oldCol: arrayToChek[2].col,
+                oldRow: arrayToChek[2].row,
+                pieceEated: {
+                  row: arrayToChek[index].row,
+                  col: arrayToChek[index].col,
+                },
+              })
+            );
             return { ...arrayToChek[index], piece: null };
           }
           return row;
@@ -224,70 +300,6 @@ export const Piece = ({ isDark, isKing, position }: any) => {
 
     return newBoard;
   };
-
-  const move = (oldPosition: any, newPosition: any) => {
-    const oldRow = oldPosition.row;
-    const oldCol = oldPosition.col;
-    const newRow = rangeNumber(
-      oldRow + Math.trunc(newPosition.y / pieceMeasure),
-      0,
-      10
-    );
-    const newCol = rangeNumber(
-      oldCol + Math.trunc(newPosition.x / pieceMeasure),
-      0,
-      10
-    );
-    const limit = limitParam(oldRow, newRow, oldCol, newCol);
-
-    if (
-      darkTurn === isDark &&
-      (newRow !== oldRow || newCol !== oldCol) &&
-      ((newRow === oldRow && newCol !== oldCol) ||
-        (newRow !== oldRow && newCol === oldCol)) &&
-      ((limit?.start.col < newCol && limit?.end.col > newCol) ||
-        (limit?.start.row < newRow && limit?.end.row > newRow))
-    ) {
-      const newBoard = board.map((col) =>
-        col.map((row: any) => {
-          if (oldCol === row.col && oldRow === row.row) {
-            return { ...row, piece: null };
-          }
-          if (newCol === row.col && newRow === row.row && !row.piece) {
-            return {
-              ...row,
-              piece: isKing
-                ? pieceType.king
-                : isDark
-                ? pieceType.dark
-                : pieceType.light,
-            };
-          }
-          return row;
-        })
-      );
-      dispatch(movePiece(eatingPiece(newBoard, newRow, newCol)));
-      if (
-        isKing &&
-        ((newCol === 10 && (newRow === 0 || newRow === 10)) ||
-          (newCol === 0 && (newRow === 0 || newRow === 10)))
-      ) {
-        dispatch(setWinner(pieceType.dark));
-      }
-      dispatch(passTurn(isDark));
-      dispatch(
-        setMoves({
-          piece: darkTurn,
-          oldCol: oldCol,
-          oldRow: oldRow,
-          newCol: newCol,
-          newRow: newRow,
-        })
-      );
-    }
-    setReverse(true);
-  };
-
   return (
     <View style={styles.dragPiece}>
       <Draggable
