@@ -5,6 +5,10 @@ export const styles = StyleSheet.create({
   historyView: {
     height: windowsHeight / 2.4,
   },
+  movesList: {
+    flexDirection: "column-reverse",
+    backgroundColor: '#b00b'
+  },
   turnText: {
     textAlign: "center",
     fontSize: 16,

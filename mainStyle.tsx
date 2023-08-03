@@ -9,7 +9,7 @@ export const mainStyles = StyleSheet.create({
   mainView: {
     borderBottomWidth: 1,
     backgroundColor: bgColorHeader,
-    height: windowsHeight,
+    height: windowsHeight - StatusBar.currentHeight!,
   },
   page:{
     paddingVertical: 5,

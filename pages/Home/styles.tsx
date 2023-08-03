@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
+    minWidth: 300,
     fontFamily: "Unbounded-Bold",
     fontSize: 50,
   },

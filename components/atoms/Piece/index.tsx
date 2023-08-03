@@ -258,7 +258,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
             (board[newCol - 1][newRow - 1]?.row === 5 &&
               board[newCol - 1][newRow - 1]?.col === 5))) ||
         (rowToCheck[3]?.piece === pieceType.king &&
-          (!rowToCheck[4] ||
+          (rowToCheck[4].row === 11 ||
             rowToCheck[4].piece === pieceType.light ||
             (rowToCheck[4].row === 5 && rowToCheck[4].col === 5)) &&
           (!board[newCol + 1] ||
@@ -270,7 +270,7 @@ export const Piece = ({ isDark, isKing, position }: any) => {
             (board[newCol - 1][newRow + 1]?.row === 5 &&
               board[newCol - 1][newRow + 1]?.col === 5))) ||
         (colToCheck[3]?.piece === pieceType.king &&
-          (!colToCheck[4] ||
+          (colToCheck[4].col === 11 ||
             colToCheck[4].piece === pieceType.light ||
             (colToCheck[4].row === 5 && colToCheck[4].col === 5)) &&
           (!board[newCol + 1] ||
